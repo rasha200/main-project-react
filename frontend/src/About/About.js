@@ -1,48 +1,41 @@
 export default function About() {
     return (
-        <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-lg-5 mb-5 mb-lg-0" style={{minHeight: '500px'}}>
-                    <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/about.jpg" style={{objectFit: 'cover'}} />
+        <section class="w3l-aboutblock py-5">
+        <div class="container py-lg-5 py-md-4 py-2">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <h3 class="title-style">Learn how to cook from your house</h3>
+                    <p class="mt-3">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.
+                        Mumquam eius modi tempora incidunt ut labore et.</p>
+                    <div class="row mt-lg-5 mt-4">
+                        <div class="col-sm-6 grids_info">
+                            <i class="fas fa-utensils"></i>
+                            <div class="detail mt-sm-4 mt-3">
+                                <h4>Easy Manual</h4>
+                                <p>Sed ut perspiciatis unde omnis iste natus.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 grids_info mt-sm-0 mt-4">
+                            <i class="fas fa-bread-slice"></i>
+                            <div class="detail mt-sm-4 mt-3">
+                                <h4> For Everyone</h4>
+                                <p>Sed ut perspiciatis unde omnis iste natus.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="section-title position-relative mb-4">
-                        <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">About Us</h6>
-                        <h1 class="display-4">First Choice For Online Education Anywhere</h1>
-                    </div>
-                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum et, tempor voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor consetetur takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam dolores dolore. Amet erat amet et magna</p>
-                    <div class="row pt-3 mx-0">
-                        <div class="col-3 px-0">
-                            <div class="bg-success text-center p-4">
-                                <h1 class="text-white" data-toggle="counter-up">123</h1>
-                                <h6 class="text-uppercase text-white">Available<span class="d-block">Subjects</span></h6>
-                            </div>
+                <div class="col-lg-7 ps-lg-5 mt-lg-0 mt-5">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <img src="assets/images/about1.jpg" alt="" class="img-fluid radius-image"/>
                         </div>
-                        <div class="col-3 px-0">
-                            <div class="bg-primary text-center p-4">
-                                <h1 class="text-white" data-toggle="counter-up">1234</h1>
-                                <h6 class="text-uppercase text-white">Online<span class="d-block">Courses</span></h6>
-                            </div>
-                        </div>
-                        <div class="col-3 px-0">
-                            <div class="bg-secondary text-center p-4">
-                                <h1 class="text-white" data-toggle="counter-up">123</h1>
-                                <h6 class="text-uppercase text-white">Skilled<span class="d-block">Instructors</span></h6>
-                            </div>
-                        </div>
-                        <div class="col-3 px-0">
-                            <div class="bg-warning text-center p-4">
-                                <h1 class="text-white" data-toggle="counter-up">1234</h1>
-                                <h6 class="text-uppercase text-white">Happy<span class="d-block">Students</span></h6>
-                            </div>
+                        <div class="col">
+                            <img src="assets/images/about2.jpg" alt="" class="img-fluid radius-image"/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     )
 }
