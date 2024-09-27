@@ -1,141 +1,67 @@
 export default function Footer() {
-  return (
-    <>
-      <div
-        class="container-fluid position-relative overlay-top bg-dark text-white-50 py-5"
-        style={{ marginTop: "90px" }}
-      >
-        <div class="container mt-5 pt-5">
-          <div class="row">
-            <div class="col-md-6 mb-5">
-              <a href="index.html" class="navbar-brand">
-                <h1 class="mt-n2 text-uppercase text-white">
-                  <i class="fa fa-book-reader mr-3"></i>Edukate
-                </h1>
-              </a>
-              <p class="m-0">
-                Accusam nonumy clita sed rebum kasd eirmod elitr. Ipsum ea lorem
-                at et diam est, tempor rebum ipsum sit ea tempor stet et
-                consetetur dolores. Justo stet diam ipsum lorem vero clita diam
-              </p>
-            </div>
-            <div class="col-md-6 mb-5">
-              <h3 class="text-white mb-4">Newsletter</h3>
-              <div class="w-100">
-                <div class="input-group">
-                  <input
-                    type="text"
-                    class="form-control border-light"
-                    style={{padding: '30px'}}
-                    placeholder="Your Email Address"
-                  />
-                  <div class="input-group-append">
-                    <button class="btn btn-primary px-4">Sign Up</button>
-                  </div>
+    return (
+        <footer class="w3l-footer-16">
+        <div class="footer-top-16 py-5">
+            <div class="container pt-lg-5 pt-md-4 pt-2 pb-lg-4 pb-2">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <h3>About Us</h3>
+                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nerihe re impedit quo
+                            minus id qd maxime aceat facere.</p>
+                        <div class="columns-2 mt-4">
+                            <ul class="social">
+                                <li><a href="#facebook"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li><a href="#linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li><a href="#twitter"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li><a href="#google"><i class="fab fa-google-plus-g"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-6 column ps-xl-5 mt-sm-0 mt-4">
+                        <h3>Quick Link</h3>
+                        <ul class="footer-gd-16">
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="classes.html">Classes</a></li>
+                            <li><a href="#support">Support</a></li>
+                            <li><a href="#blog">Blog Posts</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-6 column ps-xl-5 pe-lg-0 mt-lg-0 mt-4">
+                        <h3>Contact Info</h3>
+                        <ul class="footer-contact-list">
+                            <li class=""><i class="fas fa-map-marker-alt"></i><span>10001, 5th Avenue,
+                                    #32841 block, USA</span></li>
+                            <li class="mt-2"><i class="fas fa-phone-alt"></i><span><a href="tel:+12 23456790">+1223
+                                        456 790</a></span></li>
+                        </ul>
+                        <div class="footer-botm mt-3">
+                            <h6>Open Hours:</h6>
+                            <p class="mt-2"><span>Mon – Sat</span> : 9Am – 6Pm</p>
+                            <p> <span>Sunday</span> : CLOSED</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 column mt-lg-0 mt-4 ps-xl-5">
+                        <h3>Subscribe</h3>
+                        <form action="#" class="subscribe d-flex" method="post">
+                            <input type="email" name="email" placeholder="Email Address" required="" />
+                            <button class="button-style"><span class="fa fa-paper-plane"
+                                    aria-hidden="true"></span></button>
+                        </form>
+                        <p class="mt-4">Subscribe to our mailing list and get updates to your email inbox.</p>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-4 mb-5">
-              <h3 class="text-white mb-4">Get In Touch</h3>
-              <p>
-                <i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York,
-                USA
-              </p>
-              <p>
-                <i class="fa fa-phone-alt mr-2"></i>+012 345 67890
-              </p>
-              <p>
-                <i class="fa fa-envelope mr-2"></i>info@example.com
-              </p>
-              <div class="d-flex justify-content-start mt-4">
-                <a class="text-white mr-4" href="#">
-                  <i class="fab fa-2x fa-twitter"></i>
-                </a>
-                <a class="text-white mr-4" href="#">
-                  <i class="fab fa-2x fa-facebook-f"></i>
-                </a>
-                <a class="text-white mr-4" href="#">
-                  <i class="fab fa-2x fa-linkedin-in"></i>
-                </a>
-                <a class="text-white" href="#">
-                  <i class="fab fa-2x fa-instagram"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-md-4 mb-5">
-              <h3 class="text-white mb-4">Our Courses</h3>
-              <div class="d-flex flex-column justify-content-start">
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Web Design
-                </a>
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Apps Design
-                </a>
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Marketing
-                </a>
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Research
-                </a>
-                <a class="text-white-50" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>SEO
-                </a>
-              </div>
-            </div>
-
-            <div class="col-md-4 mb-5">
-              <h3 class="text-white mb-4">Quick Links</h3>
-              <div class="d-flex flex-column justify-content-start">
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Privacy Policy
-                </a>
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Terms & Condition
-                </a>
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Regular FAQs
-                </a>
-                <a class="text-white-50 mb-2" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Help & Support
-                </a>
-                <a class="text-white-50" href="#">
-                  <i class="fa fa-angle-right mr-2"></i>Contact
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <div
-        class="container-fluid bg-dark text-white-50 border-top py-4"
-        style={{bordeColor: 'rgba(256, 256, 256, .1) !important'}}
-      >
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 text-center text-md-left mb-3 mb-md-0">
-              <p class="m-0">
-                Copyright &copy;{" "}
-                <a class="text-white" href="#">
-                  Your Site Name
-                </a>
-                . All Rights Reserved.
-              </p>
-            </div>
-            <div class="col-md-6 text-center text-md-right">
-              <p class="m-0">
-                Designed by{" "}
-                <a class="text-white" href="https://htmlcodex.com">
-                  HTML Codex
-                </a>
-              </p>
-            </div>
-          </div>
+        <div class="copy-section text-center py-4">
+            <p class="copy-text py-1">&copy; 2022 Cooking. All rights reserved. Design by <a
+                    href="https://w3layouts.com/" target="_blank"> W3Layouts</a>
+            </p>
         </div>
-      </div>
-    </>
-  );
+    </footer>
+    )
 }
