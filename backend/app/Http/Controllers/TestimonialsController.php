@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Feedback;
+use App\Models\testimonials;
 use Illuminate\Http\Request;
 
-class FeedbackController extends Controller
+class TestimonialsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class FeedbackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Feedback $feedback)
+    public function show(testimonials $testimonials)
     {
         //
     }
@@ -42,7 +42,7 @@ class FeedbackController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Feedback $feedback)
+    public function edit(testimonials $testimonials)
     {
         //
     }
@@ -50,7 +50,7 @@ class FeedbackController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Feedback $feedback)
+    public function update(Request $request, testimonials $testimonials)
     {
         //
     }
@@ -58,7 +58,7 @@ class FeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Feedback $feedback)
+    public function destroy(testimonials $testimonials)
     {
         //
     }
