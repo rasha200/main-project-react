@@ -3,17 +3,24 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ChefController;
+use App\Http\Controllers\StudentController;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+Route::get('courses', [CourseController::class, 'index']);
+Route::post('courses', [CourseController::class, 'store']);
+Route::get('courses/{id}', [CourseController::class, 'show']);
+Route::put('courses/{id}', [CourseController::class, 'update']);
+Route::delete('courses/{id}', [CourseController::class, 'destroy']);
+
+// Assign students to a course
+Route::post('courses/{id}/students', [CourseController::class, 'assignStudents']);
+
+// Chef and Student Routes (optional depending on the requirement)
+Route::get('chefs', [ChefController::class, 'index']);
+Route::get('students', [StudentController::class, 'index']);
+
+
+

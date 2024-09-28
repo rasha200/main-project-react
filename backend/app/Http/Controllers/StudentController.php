@@ -11,9 +11,12 @@ class StudentController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+
+    {        
+        return Student::with('courses')->get();
+
        
-        return response()->json(Student::all());
+        // return response()->json(Student::all());
     }
 
 
@@ -23,11 +26,12 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+         $validatedData = $request->validate([
             'parent_name' => 'required|string|max:255',
-            'parent_number' => 'required|string|max:255',
+            'parent_number' => 'required|string|max:20',
             'id_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required',
+            'student_status' => 'required|in:Rejected,Confirmed,Pending',
+            'user_id' => 'required|exists:users,id',
         ]);
 
         $imagePath = null;
@@ -42,6 +46,7 @@ class StudentController extends Controller
        
         $imagePath = '././././uploads' . $filename;
     }
+
 
     Student::create([
         'parent_name' => $validatedData->parent_name,
@@ -62,7 +67,9 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return response()->json($student);
+        // return response()->json($student);
+        return response()->json($student->load('courses'));
+
     }
 
 
@@ -73,12 +80,12 @@ class StudentController extends Controller
     {
 
         $validatedData = $request->validate([
-            'parent_name' => 'required|string|max:255',
-            'parent_number' => 'required|string|max:255',
-            'id_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required',
+            'parent_name' => 'sometimes|required|string|max:255',
+            'parent_number' => 'sometimes|required|string|max:20',
+            'id_img' => 'sometimes|required|string',
+            'student_status' => 'sometimes|required|in:Rejected,Confirmed,Pending',
+            'user_id' => 'sometimes|required|exists:users,id',
         ]);
-
         $imagePath = null;
 
    
@@ -97,7 +104,7 @@ class StudentController extends Controller
         'parent_name' => $validatedData->parent_name,
         'parent_number' => $validatedData->parent_number,
         'id_img' => $validatedData->id_img,
-        'status' => $validatedData->status,
+        'student_status' => $validatedData->status,
     ]);
 
     return response()->json([
@@ -111,6 +118,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+       // $student->courses()->detach();
+
         $student->Delete();
         return response()->json([
             'message' => 'Student deleted successfully',

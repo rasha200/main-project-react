@@ -10,7 +10,9 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+    { 
+        // Check if the 'events' table does not exist before creating it
+        if (!Schema::hasTable('events')) {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('event_name');
@@ -19,6 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+}
 
     /**
      * Reverse the migrations.
