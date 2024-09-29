@@ -45,6 +45,7 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Courses  from "./layouts/courses";
+import Events  from "./layouts/events";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -73,6 +74,15 @@ const routes = [
     route: "/courses",
     icon: <Office size="12px" />,
     component: <Courses />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Events",
+    key: "events",
+    route: "/events",
+    icon: <Office size="12px" />,
+    component: <Events />,
     noCollapse: true,
   },
   {
