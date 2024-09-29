@@ -20,7 +20,7 @@ class ChefController extends Controller
     public function store(Request $request)
     {
 
-    Student::create([
+    chef::create([
         'chef_description' => $request->chef_description,
         'user_id' => $request->user_id,
     ]);

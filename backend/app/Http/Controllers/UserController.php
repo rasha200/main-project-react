@@ -72,6 +72,18 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $user = User::findOrFail($id);  // Find the user by id or throw 404
+        $imagePath = null;
+
+   
+        if ($request->hasFile('user_img')) {
+            $file = $request->file('user_img');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('././././uploads'); // check the path
+            $file->move($path, $filename);
+    
+           
+            $imagePath = '././././uploads' . $filename;
+        }
         $user->update([
             'Fname'=> $request['Fname'],
             'Lname'=> $request['Lname'],
@@ -79,7 +91,7 @@ class UserController extends Controller
             'user_email'=> $request['user_email'],
             'user_number'=> $request['user_number'],
             'user_gender'=> $request['user_gender'],
-            'user_img'=> $request['user_img'],
+            'user_img'=> $imagePath,
             'role'=> $request['role'],
             'user_password'=> bcrypt($request['user_password']),
         ]);

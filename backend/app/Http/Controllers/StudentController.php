@@ -96,14 +96,14 @@ class StudentController extends Controller
     $student->update([
         'parent_name' => $validatedData->parent_name,
         'parent_number' => $validatedData->parent_number,
-        'id_img' => $validatedData->id_img,
+        'id_img' =>  $imagePath,
         'status' => $validatedData->status,
     ]);
 
     return response()->json([
         'message' => 'Student updated successfully',
         'updated_student' => $student
-    ] , 201);
+    ] , 200);
     }
 
     /**
@@ -115,6 +115,7 @@ class StudentController extends Controller
         return response()->json([
             'message' => 'Student deleted successfully',
             'deleted_student' => $student
-        ] , 201);
+        ] 
+           , 201);
     }
 }
