@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactUsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,9 @@ Route::POST('/login', [AuthController::class, 'login']);
 
 
 Route::resource('tasks', TaskController::class);
+
+// Route::apiResource('contactUs', ContactUsController::class);
+
+// Route::get('/contactUs', [ContactUsController::class, 'index']);
+Route::get('/contactUs/{contactUs}', [ContactUsController::class, 'show']);
+Route::get('/contactUs', [ContactUsController::class, 'index']);

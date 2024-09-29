@@ -27,7 +27,7 @@ class StudentController extends Controller
             'parent_name' => 'required|string|max:255',
             'parent_number' => 'required|string|max:255',
             'id_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required',
+            'student_status' => 'required',
         ]);
 
         $imagePath = null;
@@ -111,6 +111,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        // $student->detach()
         $student->Delete();
         return response()->json([
             'message' => 'Student deleted successfully',
