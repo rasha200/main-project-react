@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactUsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::apiResource('contactUs', ContactUsController::class);
+
+// Route::get('/contactUs', [ContactUsController::class, 'index']);
+Route::get('/contactUs/{contactUs}', [ContactUsController::class, 'show']);
+Route::get('/contactUs', [ContactUsController::class, 'index']);
