@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentProfileController;
+use App\Http\Controllers\UserController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +27,16 @@ Route::apiResource('events', EventController::class);
 Route::get('profile/{id}', [StudentProfileController::class, 'show']);
 
 Route::put('profile/{id}', [StudentProfileController::class, 'update']);
+
+Route::get('/CreateUser', [UserController::class, 'index']);
+Route::post('/CreateUser', [UserController::class, 'store']);
+Route::put('/CreateUser/{id}', [UserController::class, 'update']);
+Route::delete('/CreateUser/{id}', [UserController::class, 'destroy']);
+
+
+
+
+
+
+
+
