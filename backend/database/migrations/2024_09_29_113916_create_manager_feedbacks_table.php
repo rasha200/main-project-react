@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chefs', function (Blueprint $table) {
+        Schema::create('manager_feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->text('chef_description');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign(columns: 'user_id')->references('id')->on('users');
             $table->timestamps();
-
         });
     }
 
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chefs');
+        Schema::dropIfExists('manager_feedbacks');
     }
 };

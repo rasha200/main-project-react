@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ManagerFeedback;
+use App\Models\manager_feedback;
 use Illuminate\Http\Request;
 
 class ManagerFeedbackController extends Controller
@@ -34,7 +34,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ManagerFeedback $managerFeedback)
+    public function show(manager_feedback $manager_feedback)
     {
         //
     }
@@ -42,7 +42,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ManagerFeedback $managerFeedback)
+    public function edit(manager_feedback $manager_feedback)
     {
         //
     }
@@ -50,7 +50,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ManagerFeedback $managerFeedback)
+    public function update(Request $request, manager_feedback $manager_feedback)
     {
         //
     }
@@ -58,7 +58,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ManagerFeedback $managerFeedback)
+    public function destroy(manager_feedback $manager_feedback)
     {
         //
     }
