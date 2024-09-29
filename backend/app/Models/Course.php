@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-
     protected $fillable = ['course_name', 'course_description', 'course_start_date', 'course_end_date', 'chef_id'];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class , 'course_id');
+    }
 
     public function chef()
     {

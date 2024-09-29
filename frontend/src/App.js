@@ -1,34 +1,17 @@
-import Header from "./Header/Header";
-import Banner from "./Banner/Banner";
-import About from "./About/About";
-import Courses from "./Courses/Courses";
-import Why from "./Why/Why";
-import Team from "./Team/Team";
-import ContentBlock from "./ContentBlock/ContentBlock";
-import Blog from "./Blog/Blog";
-import Instagram from "./Instagram/Instagram";
-import Footer from "./Footer/Footer";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./auth"; // Adjust the path accordingly
+import LandingPage from "./Landingpage"; // Adjust the path accordingly
 
 function App() {
-  return (
-    <>
-
-
-    <Header />
-    <Banner />
-    <About />
-    <Courses />
-    <Why />
-    <Team />
-    <ContentBlock />
-    <Blog />
-    <Instagram />
-    <Footer />
-
-
-    </>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/landing" element={<LandingPage />} />
+                {/* other routes */}
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
-

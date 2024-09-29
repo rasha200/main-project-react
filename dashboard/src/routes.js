@@ -55,6 +55,8 @@ import SpaceShip from "examples/Icons/SpaceShip";
 import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
+import { Task } from "@mui/icons-material";
+import Tasks from "./layouts/tasks";
 
 const routes = [
   {
@@ -77,11 +79,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "mustafa",
-    key: "mustafa",
-    route: "/billing",
+    name: "task",
+    key: "tasks",
+    route: "/task",
     icon: <CreditCard size="12px" />,
-    component: <Billing />,
+    component: <Tasks />,
     noCollapse: true,
   },
   {
