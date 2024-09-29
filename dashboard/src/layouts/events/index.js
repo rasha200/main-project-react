@@ -18,7 +18,7 @@ import Paper from '@mui/material/Paper';
 
 function Events() {
   const [events, setEvents] = useState([]);
-  const [eventData, setEventData] = useState({ id: "", event_name: "", supervisor_id: "" });
+  const [eventData, setEventData] = useState({ id: "", event_name: "", user_id: "" }); // Use user_id here
   const [editing, setEditing] = useState(false);
 
   // Fetch events from API
@@ -50,9 +50,9 @@ function Events() {
       } else {
         await axios.post("http://127.0.0.1:8000/api/events", eventData);
       }
-      setEventData({ id: "", event_name: "", supervisor_id: "" });
+      setEventData({ id: "", event_name: "", user_id: "" }); // Reset form
       setEditing(false);
-      fetchEvents(); // Refresh event list
+      fetchEvents(); 
     } catch (error) {
       console.error("Error submitting event data:", error);
     }
@@ -95,10 +95,10 @@ function Events() {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="supervisor_id">Supervisor ID</label>
+                  <label htmlFor="user_id">User ID</label> {/* Changed to user_id */}
                   <TextField
-                    name="supervisor_id"
-                    value={eventData.supervisor_id}
+                    name="user_id"
+                    value={eventData.user_id} // Ensure you're using user_id
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
@@ -122,7 +122,7 @@ function Events() {
                 <TableRow>
                   <TableCell align="left">ID</TableCell>
                   <TableCell align="left">Event Name</TableCell>
-                  <TableCell align="left">Supervisor ID</TableCell>
+                  <TableCell align="left">User ID</TableCell>
                   <TableCell align="left">Actions</TableCell>
                 </TableRow>
               </TableHead>
@@ -131,7 +131,7 @@ function Events() {
                   <TableRow key={event.id}>
                     <TableCell align="left">{event.id}</TableCell>
                     <TableCell align="left">{event.event_name}</TableCell>
-                    <TableCell align="left">{event.supervisor_id}</TableCell>
+                    <TableCell align="left">{event.user_id}</TableCell> {/* user_id used here */}
                     <TableCell align="left">
                       <Button onClick={() => handleEdit(event)} color="primary">Edit</Button>
                       <Button onClick={() => handleDelete(event.id)} color="secondary">Delete</Button>
@@ -149,4 +149,3 @@ function Events() {
 }
 
 export default Events;
-  
