@@ -64,7 +64,7 @@ class CourseController extends Controller
             'course_end_date' => 'sometimes|required|date|after:course_start_date', // Ensure end date is after start date
             'chef_id' => 'sometimes|required|exists:chefs,id',
             'students' => 'array', // Students array is optional
-            'students.*' => 'exists:students,id',
+            'students' => 'exists:students,id',
         ]);
 
         // Update the course details
