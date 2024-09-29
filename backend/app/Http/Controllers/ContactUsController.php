@@ -7,59 +7,38 @@ use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(ContactUs::all());
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        ContactUs::create([
+        'contact_subject' => $request->contact_subject,
+        'contact_message' => $request->contact_message,
+        'user_id' => $request->user_id,
+    ]);
 
-    /**
-     * Display the specified resource.
-     */
+    return response()->json([
+        'message' => 'Contact Us created successfully'
+    ] , 201);
+    }
+   
     public function show(ContactUs $contactUs)
     {
-        //
+        return response()->json($contactUs);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ContactUs $contactUs)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ContactUs $contactUs)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+  
     public function destroy(ContactUs $contactUs)
     {
-        //
+        $ContactUs->Delete();
+
+        return response()->json([
+            'message' => 'Contact Us deleted successfully'
+        ] , 201);
     }
 }

@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('manager_feedback', function (Blueprint $table) {
             $table->id();
-            $table->text('feedback');
-            $table->unsignedBigInteger('student_id');
-            $table->foreign(columns: 'student_id')->references('id')->on('students');
-            $table->unsignedBigInteger('chef_id');
-            $table->foreign(columns: 'chef_id')->references('id')->on('chefs');
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feedback');
+        Schema::dropIfExists('manager_feedback');
     }
 };

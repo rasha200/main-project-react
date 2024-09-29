@@ -15,7 +15,10 @@
     "@emotion/cache": "11.11.0",
     "@emotion/react": "11.11.0",
     "@emotion/styled": "11.11.0",
+<<<<<<< HEAD
     "@fortawesome/fontawesome-free": "^6.6.0",
+=======
+>>>>>>> 6cc26093213d82996ea5693a7d56cc8e7145d63e
     "@mui/icons-material": "5.11.16",
     "@mui/material": "5.13.0",
     "@mui/styled-engine": "5.12.3",
@@ -27,7 +30,10 @@
     "bootstrap": "^5.3.3",
     "chart.js": "3.9.1",
     "chroma-js": "2.4.2",
+<<<<<<< HEAD
     "mdb-react-ui-kit": "^9.0.0",
+=======
+>>>>>>> 6cc26093213d82996ea5693a7d56cc8e7145d63e
     "prop-types": "15.8.1",
     "react": ">=16.8.0",
     "react-chartjs-2": "3.0.5",

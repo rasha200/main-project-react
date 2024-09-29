@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('user_number');
             $table->enum('user_gender', ['Male', 'Female']);
             $table->string('user_img')->nullable();
+            $table->enum('role', ['student', 'manager' , 'chef' , 'supervisor'])->default('student');// Default role is 'student' : [student , manger , superviser , chief]
             $table->timestamp('email_verified_at')->nullable();
             $table->string('user_password');
             $table->rememberToken();
