@@ -41,4 +41,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function Student()
+    {
+        return $this->hasOne(Student::class, 'Student_id');
+    }
+
+    public function Chef()
+    {
+        return $this->hasOne(Chef::class, 'ched_id');
+    }
+
+
 }

@@ -1,65 +1,83 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Get all feedback (READ)
     public function index()
     {
-        //
+        return Feedback::with(['student', 'chef'])->get()->map(function ($feedback) {
+            return [
+                'id' => $feedback->id,
+                'feedback' => $feedback->feedback,
+                'student_name' => $feedback->student->user->Fname	,  // No need for additional query
+                'chef_name' => $feedback->chef->user->Fname . ' ' . $feedback->chef->user->Lname, 
+            ];
+        });
     }
+    
+    
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $feedback = Feedback::with(['student', 'chef'])->findOrFail($id);
+        return [
+            'id' => $feedback->id,
+            'feedback' => $feedback->feedback,
+            'student_name' => $feedback->student->Fname . ' ' . $feedback->student->Lname, 
+            'chef_name' => $feedback->chef->Fname . ' ' . $feedback->chef->Lname,
+        ];
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'feedback' => 'required|string',
+            'student_id' => 'required|exists:students,id',
+            'chef_id' => 'required|exists:chefs,id',
+        ]);
+
+        $feedback = Feedback::create($validatedData);
+
+        return response()->json([
+            'message' => 'Feedback created successfully',
+            'data' => [
+                'feedback' => $feedback->feedback,
+                'student_name' => $feedback->student->Fname . ' ' . $feedback->student->Lname,
+                'chef_name' => $feedback->chef->Fname . ' ' . $feedback->chef->Lname,
+            ]
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Feedback $feedback)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'feedback' => 'required|string',
+            'student_id' => 'required|exists:students,id',
+            'chef_id' => 'required|exists:chefs,id',
+        ]);
+
+        $feedback = Feedback::findOrFail($id);
+        $feedback->update($validatedData);
+
+        return response()->json([
+            'message' => 'Feedback updated successfully',
+            'data' => [
+                'feedback' => $feedback->feedback,
+                'student_name' => $feedback->student->Fname . ' ' . $feedback->student->Lname,
+                'chef_name' => $feedback->chef->Fname . ' ' . $feedback->chef->Lname,
+            ]
+        ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Feedback $feedback)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Feedback $feedback)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Feedback $feedback)
-    {
-        //
+        $feedback = Feedback::findOrFail($id);
+        $feedback->delete();
+        return response()->json(null, 204);
     }
 }
