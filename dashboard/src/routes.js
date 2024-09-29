@@ -54,6 +54,8 @@ import SpaceShip from "examples/Icons/SpaceShip";
 import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
+import { Task } from "@mui/icons-material";
+import Tasks from "./layouts/tasks";
 
 const routes = [
   {
