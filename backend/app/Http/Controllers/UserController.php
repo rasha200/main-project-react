@@ -4,73 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
 
     public function index()
     {
-       return response()->json(User::paginate(10));
+        return User::all();
     }
-
 
     public function store(Request $request)
     {
+        
+        $user = new User();
+        $user->Fname = $request->Fname;
+        $user->Lname = $request->Lname;
+        $user->user_age = $request->user_age;
+        $user->user_email = $request->user_email;
+        $user->user_number = $request->user_number;
+        $user->user_gender = $request->user_gender;
+        $user->user_password = Hash::make($request->user_password); 
+        $user->save();
 
-   
-    $validatedData = $request->validate([
-        'Fname' => 'required|string|max:255',
-        'Lname' => 'required|string|max:255',
-        'user_age' => 'required|integer',
-        'user_email' => 'required|email|unique:users,user_email',
-        'user_number' => 'required|string',
-        'user_gender' => 'required|string',
-        'user_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
-        'role' => 'required|string',
-        'user_password' => 'required|string|min:8',
-    ]);
-
-   
-    $imagePath = null;
-
-   
-    if ($request->hasFile('user_img')) {
-        $file = $request->file('user_img');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $path = public_path('././././uploads'); // check the path
-        $file->move($path, $filename);
-
-       
-        $imagePath = '././././uploads' . $filename;
+        return response()->json($user, 201);
     }
 
-    
-    User::create([
-        'Fname' => $validatedData['Fname'],
-        'Lname' => $validatedData['Lname'],
-        'user_age' => $validatedData['user_age'],
-        'user_email' => $validatedData['user_email'],
-        'user_number' => $validatedData['user_number'],
-        'user_gender' => $validatedData['user_gender'],
-        'user_img' => $imagePath, 
-        'role' => $validatedData['role'],
-        'user_password' => bcrypt($validatedData['user_password']),
-    ]);
-
-
-        return response()->json([
-            'message' => 'User created successfully'
-        ] , 201);
-    }
-
-    public function show(User $user)
+    public function update(Request $request, $id)
     {
-       return response()->json($user);
+        $user = User::findOrFail($id);
+        $user->Fname = $request->Fname;
+        $user->Lname = $request->Lname;
+        $user->user_age = $request->user_age;
+        $user->user_email = $request->user_email;
+        $user->user_number = $request->user_number;
+        $user->user_gender = $request->user_gender;
+
+        if ($request->user_password) {
+            $user->user_password = Hash::make($request->user_password); // Hashing the password
+        }
+
+        $user->save();
+        return response()->json($user);
     }
 
-
-
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
         $user = User::findOrFail($id);  // Find the user by id or throw 404
         $imagePath = null;
