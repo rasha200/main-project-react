@@ -12,7 +12,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-       
+
         return response()->json(Student::all());
     }
 
@@ -27,19 +27,19 @@ class StudentController extends Controller
             'parent_name' => 'required|string|max:255',
             'parent_number' => 'required|string|max:255',
             'id_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required',
+            'student_status' => 'required',
         ]);
 
         $imagePath = null;
 
-   
+
     if ($request->hasFile('id_img')) {
         $file = $request->file('id_img');
         $filename = time() . '.' . $file->getClientOriginalExtension();
         $path = public_path('././././uploads'); // check the path
         $file->move($path, $filename);
 
-       
+
         $imagePath = '././././uploads' . $filename;
     }
 
@@ -81,14 +81,14 @@ class StudentController extends Controller
 
         $imagePath = null;
 
-   
+
     if ($request->hasFile('id_img')) {
         $file = $request->file('id_img');
         $filename = time() . '.' . $file->getClientOriginalExtension();
         $path = public_path('././././uploads'); // check the path
         $file->move($path, $filename);
 
-       
+
         $imagePath = '././././uploads' . $filename;
     }
 
@@ -111,6 +111,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        // $student->detach()
         $student->Delete();
         return response()->json([
             'message' => 'Student deleted successfully',
