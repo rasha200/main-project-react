@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('event_name');
             $table->unsignedBigInteger('supervisor_id');
-            $table->foreign(columns: 'supervisor_id')->references('id')->on('supervisors');
+            $table->foreign(columns: 'supervisor_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
