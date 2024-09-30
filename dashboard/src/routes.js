@@ -57,6 +57,7 @@ import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
+import Supervisors from "./layouts/Supervisor";
 
 const routes = [
   {
@@ -84,6 +85,15 @@ const routes = [
     route: "/task",
     icon: <CreditCard size="12px" />,
     component: <Tasks />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Create Supervisor",
+    key: "Supervisors",
+    route: "/Supervisors",
+    icon: <Shop size="12px" />,
+    component: <Supervisors />,
     noCollapse: true,
   },
   {
