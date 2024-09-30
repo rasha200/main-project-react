@@ -23,7 +23,11 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
 function TaskManager() {
+  // State declarations
   const [tasks, setTasks] = useState([]); // State to hold task data
+  const [students, setStudents] = useState([]); // State to hold students data
+  const [courses, setCourses] = useState([]); // State to hold courses data
+
   const [formData, setFormData] = useState({
     task_name: "",
     task_description: "",
@@ -31,27 +35,49 @@ function TaskManager() {
     course_id: "",
     student_id: "",
     chef_id: 1, // Assuming chef_id is known
-    task_file: null // File data
+    task_file: null, // File data
   });
-  const [editMode, setEditMode] = useState(false);
-  const [editTaskId, setEditTaskId] = useState(null); // State to track the task being edited
+  const [editMode, setEditMode] = useState(false); // Toggle between create/edit mode
+  const [editTaskId, setEditTaskId] = useState(null); // Track task being edited
 
-  // Fetch tasks on component mount
+  // Fetch tasks and students on component mount
   useEffect(() => {
+    fetchStudents();
     fetchTasks();
+    fetchCourses(); // Fetch courses when component mounts
   }, []);
+
+  // Function to fetch students from API
+  const fetchStudents = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/student");
+      setStudents(response.data);
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    }
+  };
+  const fetchCourses = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/api/course");
+      setCourses(response.data); // Set course data in state
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+  
 
   // Function to fetch all tasks from API
   const fetchTasks = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/tasks");
-      setTasks(response.data); // Set tasks to the state
+      setTasks(response.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
     }
   };
 
-  // Handle form input change
+  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -62,10 +88,9 @@ function TaskManager() {
     setFormData({ ...formData, task_file: e.target.files[0] });
   };
 
-  // Handle form submit for creating or updating tasks
+  // Handle form submission for creating or updating tasks
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const data = new FormData();
     data.append("task_name", formData.task_name);
     data.append("task_description", formData.task_description);
@@ -75,20 +100,17 @@ function TaskManager() {
     data.append("chef_id", formData.chef_id);
 
     if (formData.task_file) {
-      data.append("task_file", formData.task_file); // Attach file if exists
+      data.append("task_file", formData.task_file);
     }
 
     try {
       if (editMode) {
-        // Update existing task
-        await axios.post(`http://127.0.0.1:8000/api/tasks/${editTaskId}`, data);
+        await axios.post(`http://127.0.0.1:8000/api/tasks/${editTaskId}`, data); // Update task
         setEditMode(false);
         setEditTaskId(null);
       } else {
-        // Create new task
-        await axios.post("http://127.0.0.1:8000/api/tasks", data);
+        await axios.post("http://127.0.0.1:8000/api/tasks", data); // Create new task
       }
-
       fetchTasks(); // Refresh tasks after create/update
       setFormData({
         task_name: "",
@@ -97,14 +119,14 @@ function TaskManager() {
         course_id: "",
         student_id: "",
         chef_id: 1,
-        task_file: null
-      }); // Reset form
+        task_file: null,
+      }); // Reset form after submission
     } catch (error) {
       console.error("Error submitting task:", error);
     }
   };
 
-  // Handle editing a task
+  // Handle task edit action
   const handleEdit = (task) => {
     setFormData({
       task_name: task.task_name,
@@ -113,13 +135,13 @@ function TaskManager() {
       course_id: task.course_id,
       student_id: task.student_id,
       chef_id: task.chef_id,
-      task_file: null // Reset file input for editing
+      task_file: null, // Reset file input for editing
     });
     setEditTaskId(task.id);
     setEditMode(true);
   };
 
-  // Handle deleting a task
+  // Handle task delete action
   const handleDelete = async (taskId) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/tasks/${taskId}`);
@@ -133,12 +155,12 @@ function TaskManager() {
     <DashboardLayout>
       <DashboardNavbar />
       <SoftBox py={3}>
+        {/* Task Form */}
         <SoftBox mb={3}>
           <Card>
             <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <SoftTypography variant="h6">add task</SoftTypography>
+              <SoftTypography variant="h6">Add Task</SoftTypography>
             </SoftBox>
-            {/* Task Form */}
             <form onSubmit={handleSubmit} className="p-5">
               <MDBRow className="mb-4">
                 <MDBCol>
@@ -170,29 +192,53 @@ function TaskManager() {
                 value={formData.task_end_date}
                 onChange={handleInputChange}
               />
+
               <MDBInput
+                hidden ="true"
                 wrapperClass="mb-4"
+                id="form6Example4"
+               
+                name="course_id"
+                value={formData.course_id}
+                onChange={handleInputChange}
+              />
+
+              <select 
+                  className="form-select mb-4"
                 id="form6Example4"
                 label="Course ID"
                 name="course_id"
                 value={formData.course_id}
                 onChange={handleInputChange}
-              />
-              <MDBInput
-                wrapperClass="mb-4"
-                id="form6Example5"
-                label="Student ID"
+              >
+                 <option value="">Select course</option>
+                {courses.map((course) => (
+                  <option key={course.id} value={course.id}>
+                    {course.course_name}
+                  </option>
+                ))}
+              </select>
+
+              {/* Dropdown for students */}
+              <select
+                className="form-select mb-4"
                 name="student_id"
                 value={formData.student_id}
                 onChange={handleInputChange}
-              />
+              >
+                <option value="">Select Student</option>
+                {students.map((student) => (
+                  <option key={student.id} value={student.id}>
+                    {student.parent_name}
+                  </option>
+                ))}
+              </select>
 
-              {/* File Input for task_file */}
+              {/* File Input */}
               <MDBInput
                 wrapperClass="mb-4"
                 type="file"
                 id="form6Example6"
-
                 onChange={handleFileChange}
               />
 
@@ -212,9 +258,7 @@ function TaskManager() {
             <SoftBox>
               <TableContainer component={Paper}>
                 <Table aria-label="simple table">
-                  <TableHead>
-
-                  </TableHead>
+       
                   <TableBody>
                     {tasks.map((task) => (
                       <TableRow key={task.id}>
