@@ -7,59 +7,51 @@ use Illuminate\Http\Request;
 
 class TestimonialsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        //
+        $testimonials = Testimonial::with('user:id,Fname,Lname')->get();
+        return response()->json($testimonials);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+
+
     public function store(Request $request)
     {
-        //
+        testimonials::create([
+            'message' => $request->contact_subject,
+            'user_id' => $request->user_id,
+        ]);
+    
+        return response()->json([
+            'message' => 'Testimonials created successfully'
+        ] , 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
+
+    
+
     public function show(testimonials $testimonials)
     {
-        //
+        return response()->json([
+            "testimonials" => $testimonials,
+            "status" => 200,
+        ],200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(testimonials $testimonials)
-    {
-        //
-    }
+    
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, testimonials $testimonials)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(testimonials $testimonials)
     {
-        //
+        $testimonials->Delete();
+
+        return response()->json([
+            'message' => 'Testimonials deleted successfully'
+        ] , 201);
     }
 }

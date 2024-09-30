@@ -6,6 +6,7 @@ import Why from "./Why/Why";
 import Team from "./Team/Team";
 import ContentBlock from "./ContentBlock/ContentBlock";
 import Blog from "./Blog/Blog";
+import Testimonials from "./Testimonials/Testimonials";
 import Instagram from "./Instagram/Instagram";
 import Footer from "./Footer/Footer";
 
@@ -20,6 +21,7 @@ function App() {
             <Team />
             <ContentBlock />
             <Blog />
+            <Testimonials />
             <Instagram />
             <Footer />
 

@@ -44,7 +44,7 @@ import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-import Courses  from "./layouts/courses";
+import Courses from "./layouts/courses";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -57,6 +57,8 @@ import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
+import ContactUs from "layouts/contactUs";
+import Testimonials from "layouts/testimonials";
 
 const routes = [
   {
@@ -84,6 +86,24 @@ const routes = [
     route: "/task",
     icon: <CreditCard size="12px" />,
     component: <Tasks />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Contact Us",
+    key: "contactUs",
+    route: "/contactUs",
+    icon: <CreditCard size="12px" />,
+    component: <ContactUs />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Testimonials",
+    key: "testimonials",
+    route: "/testimonials",
+    icon: <CreditCard size="12px" />,
+    component: <Testimonials />,
     noCollapse: true,
   },
   {
