@@ -22,6 +22,13 @@ class Chef extends Model
         return $this->hasMany(ChefFeedback::class);
     }
 
+
+    public function Manegerfeedbacks()
+    {
+        return $this->hasMany(ManagerFeedback::class);
+    }
+
+
     public function User()
     {
         return $this->belongsTo(User::class, 'user_id');

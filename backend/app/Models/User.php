@@ -56,8 +56,11 @@ class User extends Authenticatable
 
     public function Chef()
     {
-        return $this->hasOne(Chef::class, 'ched_id');
+        return $this->hasOne(Chef::class, foreignKey: 'ched_id');
     }
 
-
+    public function Manegerfeedbacks()
+    {
+        return $this->hasOne(ManagerFeedback::class, foreignKey: 'manager_feedback_id');
+    }
 }

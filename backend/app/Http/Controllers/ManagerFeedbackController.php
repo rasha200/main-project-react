@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\manager_feedback;
+use App\Models\ManagerFeedback; 
 use Illuminate\Http\Request;
 
 class ManagerFeedbackController extends Controller
@@ -12,7 +12,14 @@ class ManagerFeedbackController extends Controller
      */
     public function index()
     {
-        //
+        return ManagerFeedback::with(['Maneger', 'chef'])->get()->map(function ($feedback) {
+            return [
+                'id' => $feedback->id,
+                'feedback' => $feedback->feedback,
+                'student_name' => $feedback->student->user->Fname	,  // No need for additional query
+                'chef_name' => $feedback->chef->user->Fname . ' ' . $feedback->chef->user->Lname, 
+            ];
+        });
     }
 
     /**
@@ -34,7 +41,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(manager_feedback $manager_feedback)
+    public function show(ManagerFeedback $manager_feedback)
     {
         //
     }
@@ -42,7 +49,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(manager_feedback $manager_feedback)
+    public function edit(ManagerFeedback $manager_feedback) 
     {
         //
     }
@@ -50,7 +57,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, manager_feedback $manager_feedback)
+    public function update(Request $request, ManagerFeedback $manager_feedback) 
     {
         //
     }
@@ -58,7 +65,7 @@ class ManagerFeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(manager_feedback $manager_feedback)
+    public function destroy(ManagerFeedback $manager_feedback) 
     {
         //
     }

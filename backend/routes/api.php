@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChefController;
 use App\Http\Controllers\ChefFeedbackController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ManagerFeedbackController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,12 @@ Route::delete('feedback/{id}', [ChefFeedbackController::class, 'destroy']);
 // 
 Route::apiResource('/chefs', ChefController::class);
 Route::apiResource('/students', StudentController::class);
+
+//////////////////////////////////
+
+
+Route::get('feedbackManeger', [ManagerFeedbackController::class, 'index']); 
+Route::get('feedbackManeger/{id}', [ManagerFeedbackController::class, 'show']); 
+Route::post('feedbackManeger', [ManagerFeedbackController::class, 'store']); 
+Route::put('feedbackManeger/{id}', [ManagerFeedbackController::class, 'update']); 
+Route::delete('feedbackManeger/{id}', [ManagerFeedbackController::class, 'destroy']); 

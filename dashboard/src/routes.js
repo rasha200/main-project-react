@@ -58,7 +58,7 @@ import Cube from "examples/Icons/Cube";
 
 import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
-import Feedback from "layouts/feedback";
+import Feedback from "layouts/Feedback";
 
 
 const routes = [

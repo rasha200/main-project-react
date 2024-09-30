@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chef;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ChefController extends Controller
@@ -12,9 +13,11 @@ class ChefController extends Controller
      */
     public function index()
     {
-        return response()->json(Chef::all());
-    }
 
+        $chef = Chef::with('User')->get();
+
+        return response()->json( $chef);
+    }
    
     
     public function store(Request $request)

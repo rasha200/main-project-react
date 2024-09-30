@@ -56,15 +56,19 @@ class ChefFeedbackController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Validate incoming request data
         $validatedData = $request->validate([
             'feedback' => 'required|string',
             'student_id' => 'required|exists:students,id',
             'chef_id' => 'required|exists:chefs,id',
         ]);
-
-        $feedback = ChefFeedback::findOrFail($id);
+    
+        // Find the feedback record and eager load related student and chef
+        $feedback = ChefFeedback::with(['student', 'chef','user'])->findOrFail($id);
+    
+        // Update the feedback with validated data
         $feedback->update($validatedData);
-
+    
         return response()->json([
             'message' => 'Feedback updated successfully',
             'data' => [
@@ -74,6 +78,7 @@ class ChefFeedbackController extends Controller
             ]
         ], 200);
     }
+    
 
     public function destroy($id)
     {

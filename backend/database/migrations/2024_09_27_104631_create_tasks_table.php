@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('task_description');
             $table->date('task_end_date');
             $table->string('task_file')->nullable();
+            $table->string('task_img')->nullable();
             $table->enum('task_status', ['Pending', 'Completed'])->default('Pending');
             $table->unsignedBigInteger('course_id');
             $table->foreign(columns: 'course_id')->references('id')->on('courses');

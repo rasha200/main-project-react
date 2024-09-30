@@ -12,9 +12,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-       
-        return response()->json(Student::all());
+        // Eager load the user relationship
+        $students = Student::with('User')->get();
+    
+        return response()->json($students);
     }
+    
 
 
 

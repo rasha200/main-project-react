@@ -27,12 +27,12 @@ import { useEffect, useState } from "react";
 
 function Feedback() {
   const [feedbacks, setFeedbacks] = useState([]);
-  const [students, setStudents] = useState([]); // State for students
-  const [chefs, setChefs] = useState([]); // State for chefs
+  const [students, setStudents] = useState([]);
+  const [chefs, setChefs] = useState([]);
   const [feedbackData, setFeedbackData] = useState({
     id: "",
     feedback: "",
-    student_id: "", // Should use student_id instead of student_name
+    student_id: "",
     chef_id: "",
   });
   const [editing, setEditing] = useState(false);
@@ -51,7 +51,6 @@ function Feedback() {
   const fetchStudents = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/students");
-      console.log(response.data); // Log the response data
       if (Array.isArray(response.data)) {
         setStudents(response.data);
       } else {
@@ -136,7 +135,6 @@ function Feedback() {
                 {editing ? "Edit Feedback" : "Add Feedback"}
               </SoftTypography>
               <form onSubmit={handleSubmit}>
-                {/* Feedback input */}
                 <div className="form-group">
                   <label htmlFor="feedbackInput">Feedback</label>
                   <TextField
@@ -156,52 +154,49 @@ function Feedback() {
                 {/* Student select input */}
                 <div className="form-group">
                   <label htmlFor="studentIdSelect">Student</label>
-                  <Select
-  name="student_id"
-  value={feedbackData.student_id} 
-  onChange={handleChange}
-  className="form-control"
-  id="studentIdSelect"
-  fullWidth
-  margin="normal"
-  required
->
-  {students.length > 0 ? (
-    students.map((student) => (
-      <MenuItem key={student.id} value={student.id}>
-        {student.user.Fname}
-      </MenuItem>
-    ))
-  ) : (
-    <MenuItem disabled>No students available</MenuItem>
-  )}
-</Select>
-
+                  <select
+                    name="student_id"
+                    value={feedbackData.student_id}
+                    onChange={handleChange}
+                    className="form-control"
+                    id="studentIdSelect"
+                   
+                  >
+                    {students.length > 0 ? (
+                      students.map((student) => (
+                        <option key={student.id} value={student.id}>
+                          {student.user ? student.user.Fname : "Unknown"}
+                        </option>
+                      ))
+                    ) : (
+                      <MenuItem disabled>No students available</MenuItem>
+                    )}
+                  </select>
                 </div>
 
                 {/* Chef select input */}
                 <div className="form-group">
                   <label htmlFor="chefIdSelect">Chef</label>
-                  <Select
+                  <select
                     name="chef_id"
                     value={feedbackData.chef_id}
                     onChange={handleChange}
                     className="form-control"
                     id="chefIdSelect"
-                    fullWidth
-                    margin="normal"
-                    required
+                   
+                   
+                    
                   >
-                    {chefs && chefs.length > 0 ? (
+                    {chefs.length > 0 ? (
                       chefs.map((chef) => (
-                        <MenuItem key={chef.id} value={chef.id}>
-                          {chef.user.Fname} 
-                        </MenuItem>
+                        <option key={chef.id} value={chef.id}>
+                          {chef.user ? chef.user.Fname : "Unknown"}
+                        </option>
                       ))
                     ) : (
                       <MenuItem disabled>No chefs available</MenuItem>
                     )}
-                  </Select>
+                  </select>
                 </div>
 
                 {/* Submit Button */}
@@ -221,7 +216,11 @@ function Feedback() {
               <Table>
                 <TableHead>
                   <TableRow>
-                  
+                    {/* <TableCell>ID</TableCell>
+                    <TableCell>Feedback</TableCell>
+                    <TableCell>Student Name</TableCell>
+                    <TableCell>Chef Name</TableCell>
+                    <TableCell>Actions</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -230,7 +229,7 @@ function Feedback() {
                       <TableRow key={feedback.id}>
                         <TableCell>{feedback.id}</TableCell>
                         <TableCell>{feedback.feedback}</TableCell>
-                        <TableCell>{feedback.student_name}</TableCell>
+                        <TableCell>nsreen</TableCell>
                         <TableCell>{feedback.chef_name}</TableCell>
                         <TableCell>
                           <Button onClick={() => handleEdit(feedback)} color="primary">
