@@ -1,13 +1,15 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\StudentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +46,21 @@ Route::post('/CreateStudent', [StudentController::class, 'store']); // Create a 
 Route::get('/CreateStudent/{student}', [StudentController::class, 'show']); // Get a specific student by ID
 Route::put('/CreateStudent/{student}', [StudentController::class, 'update']); // Update a specific student by ID
 Route::delete('/CreateStudent/{student}', [StudentController::class, 'destroy']); // Delete a specific student by ID
+Route::post('/register', [AuthController ::class, 'register']);
+Route::POST('/login', [AuthController::class, 'login']);
 
+
+Route::resource('tasks', TaskController::class);
+
+Route::resource('/student' , StudentController::class);
+Route::resource('/course' , CourseController::class);
+
+
+// Route::apiResource('contactUs', ContactUsController::class);
+
+// Route::get('/contactUs', [ContactUsController::class, 'index']);
+Route::get('/contactUs/{contactUs}', [ContactUsController::class, 'show']);
+Route::get('/contactUs', [ContactUsController::class, 'index']);
 
 
 
