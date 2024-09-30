@@ -12,7 +12,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-       
+
         return response()->json(Student::all());
     }
 
@@ -32,14 +32,14 @@ class StudentController extends Controller
 
         $imagePath = null;
 
-   
+
     if ($request->hasFile('id_img')) {
         $file = $request->file('id_img');
         $filename = time() . '.' . $file->getClientOriginalExtension();
         $path = public_path('././././uploads'); // check the path
         $file->move($path, $filename);
 
-       
+
         $imagePath = '././././uploads' . $filename;
     }
 
@@ -81,14 +81,14 @@ class StudentController extends Controller
 
         $imagePath = null;
 
-   
+
     if ($request->hasFile('id_img')) {
         $file = $request->file('id_img');
         $filename = time() . '.' . $file->getClientOriginalExtension();
         $path = public_path('././././uploads'); // check the path
         $file->move($path, $filename);
 
-       
+
         $imagePath = '././././uploads' . $filename;
     }
 
