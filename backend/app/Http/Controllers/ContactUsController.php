@@ -13,6 +13,10 @@ class ContactUsController extends Controller
 
     }
 
+
+
+
+
     public function store(Request $request)
     {
         ContactUs::create([
@@ -25,12 +29,22 @@ class ContactUsController extends Controller
         'message' => 'Contact Us created successfully'
     ] , 201);
     }
+
+
+
    
     public function show(ContactUs $contactUs)
     {
-        return response()->json($contactUs);
+        return response()->json([
+            "contact" => $contactUs,
+            "status" => 200,
+        ],200);
 
     }
+
+
+
+
 
   
     public function destroy(ContactUs $contactUs)

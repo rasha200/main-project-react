@@ -33,6 +33,7 @@ class UserFactory extends Factory
             'user_password' => bcrypt('password'),             // Default password
         ];
     }
+    
 
 
 
