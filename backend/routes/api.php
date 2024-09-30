@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +37,13 @@ Route::delete('/CreateUser/{id}', [UserController::class, 'destroy']);
 
 
 
+
+
+Route::get('/CreateStudent', [StudentController::class, 'index']); // Get all students
+Route::post('/CreateStudent', [StudentController::class, 'store']); // Create a new student
+Route::get('/CreateStudent/{student}', [StudentController::class, 'show']); // Get a specific student by ID
+Route::put('/CreateStudent/{student}', [StudentController::class, 'update']); // Update a specific student by ID
+Route::delete('/CreateStudent/{student}', [StudentController::class, 'destroy']); // Delete a specific student by ID
 
 
 

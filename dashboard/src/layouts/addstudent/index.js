@@ -27,7 +27,13 @@ function Users() {
     user_gender: { male: false, female: false },
     user_password: "",
   });
-  const [editing, setEditing] = useState(false);
+  const [studentData, setStudentData] = useState({
+    parent_name: "",
+    parent_number: "",
+    student_status: "Pending",
+  });
+  const [userId, setUserId] = useState(null); // Store created user ID
+  const [step, setStep] = useState(1); // Control form step
 
   const fetchUsers = async () => {
     try {
@@ -45,7 +51,11 @@ function Users() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prev) => ({ ...prev, [name]: value }));
+    if (step === 1) {
+      setUserData((prev) => ({ ...prev, [name]: value }));
+    } else {
+      setStudentData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleGenderChange = (e) => {
@@ -59,9 +69,8 @@ function Users() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleUserSubmit = async (e) => {
     e.preventDefault();
-
     const selectedGenders = Object.entries(userData.user_gender)
       .filter(([, value]) => value)
       .map(([key]) => key.charAt(0).toUpperCase() + key.slice(1))
@@ -73,11 +82,23 @@ function Users() {
     };
 
     try {
-      if (editing) {
-        await axios.put(`http://127.0.0.1:8000/api/CreateUser/${userData.id}`, payload);
-      } else {
-        await axios.post("http://127.0.0.1:8000/api/CreateUser", payload);
-      }
+      const userResponse = await axios.post("http://127.0.0.1:8000/api/CreateUser", payload);
+      setUserId(userResponse.data.id); // Save user ID
+      setStep(2); // Move to step 2
+    } catch (error) {
+      console.error("Error creating user:", error.response.data);
+    }
+  };
+
+  const handleStudentSubmit = async (e) => {
+    e.preventDefault();
+    const studentPayload = {
+      ...studentData,
+      user_id: userId, // Use the saved user ID
+    };
+
+    try {
+      await axios.post("http://127.0.0.1:8000/api/CreateStudent", studentPayload);
       // Reset form
       setUserData({
         Fname: "",
@@ -88,30 +109,16 @@ function Users() {
         user_gender: { male: false, female: false },
         user_password: "",
       });
-      setEditing(false);
-      fetchUsers();
+      setStudentData({
+        parent_name: "",
+        parent_number: "",
+        student_status: "Pending",
+      });
+      setUserId(null); // Reset user ID
+      setStep(1); // Go back to step 1
+      fetchUsers(); // Refresh users
     } catch (error) {
-      console.error("Error submitting user data:", error.response.data);
-    }
-  };
-
-  const handleEdit = (user) => {
-    setUserData({ 
-      ...user, 
-      user_gender: { 
-        male: user.user_gender.includes("Male"), 
-        female: user.user_gender.includes("Female") 
-      } 
-    });
-    setEditing(true);
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://127.0.0.1:8000/api/CreateUser/${id}`);
-      fetchUsers();
-    } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error("Error creating student:", error.response.data);
     }
   };
 
@@ -122,41 +129,32 @@ function Users() {
         <SoftBox mb={3}>
           <Card>
             <SoftBox p={6}>
-              <SoftTypography variant="h4">{editing ? "Edit User" : "Add User"}</SoftTypography>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="Fname">First Name</label>
-                  <TextField name="Fname" value={userData.Fname} onChange={handleChange} fullWidth margin="normal" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="Lname">Last Name</label>
-                  <TextField name="Lname" value={userData.Lname} onChange={handleChange} fullWidth margin="normal" required />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="user_age">Age</label>
-                  <TextField name="user_age" value={userData.user_age} onChange={handleChange} fullWidth margin="normal" required type="number" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="user_email">Email</label>
-                  <TextField name="user_email" value={userData.user_email} onChange={handleChange} fullWidth margin="normal" required type="email" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="user_number">Phone Number</label>
-                  <TextField name="user_number" value={userData.user_number} onChange={handleChange} fullWidth margin="normal" required />
-                </div>
-                <div className="form-group">
-                  <label>Gender</label>
-                  <div>
+              {step === 1 ? (
+                <>
+                  <SoftTypography variant="h4">Add User</SoftTypography>
+                  <form onSubmit={handleUserSubmit}>
+                    <TextField name="Fname" label="First Name" value={userData.Fname} onChange={handleChange} fullWidth margin="normal" required />
+                    <TextField name="Lname" label="Last Name" value={userData.Lname} onChange={handleChange} fullWidth margin="normal" required />
+                    <TextField name="user_age" label="Age" value={userData.user_age} onChange={handleChange} fullWidth margin="normal" required type="number" />
+                    <TextField name="user_email" label="Email" value={userData.user_email} onChange={handleChange} fullWidth margin="normal" required type="email" />
+                    <TextField name="user_number" label="Phone Number" value={userData.user_number} onChange={handleChange} fullWidth margin="normal" required />
                     <FormControlLabel control={<Checkbox checked={userData.user_gender.male} onChange={handleGenderChange} name="male" />} label="Male" />
                     <FormControlLabel control={<Checkbox checked={userData.user_gender.female} onChange={handleGenderChange} name="female" />} label="Female" />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="user_password">Password</label>
-                  <TextField name="user_password" value={userData.user_password} onChange={handleChange} type="password" fullWidth margin="normal" required />
-                </div>
-                <Button type="submit" variant="contained" color="primary">{editing ? "Update" : "Add"}</Button>
-              </form>
+                    <TextField name="user_password" label="Password" value={userData.user_password} onChange={handleChange} fullWidth margin="normal" required type="password" />
+                    <Button type="submit" variant="contained" color="primary">Next</Button>
+                  </form>
+                </>
+              ) : (
+                <>
+                  <SoftTypography variant="h4">Add Student</SoftTypography>
+                  <form onSubmit={handleStudentSubmit}>
+                    <TextField name="parent_name" label="Parent Name" value={studentData.parent_name} onChange={handleChange} fullWidth margin="normal" required />
+                    <TextField name="parent_number" label="Parent Phone Number" value={studentData.parent_number} onChange={handleChange} fullWidth margin="normal" required />
+                    <TextField name="student_status" label="Status" value={studentData.student_status} onChange={handleChange} fullWidth margin="normal" required />
+                    <Button type="submit" variant="contained" color="primary">Create Student</Button>
+                  </form>
+                </>
+              )}
             </SoftBox>
           </Card>
         </SoftBox>
@@ -166,18 +164,6 @@ function Users() {
           </SoftBox>
           <SoftBox>
             <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left">ID</TableCell>
-                  <TableCell align="left">First Name</TableCell>
-                  <TableCell align="left">Last Name</TableCell>
-                  <TableCell align="left">Age</TableCell>
-                  <TableCell align="left">Email</TableCell>
-                  <TableCell align="left">Phone Number</TableCell>
-                  <TableCell align="left">Gender</TableCell>
-                  <TableCell align="left">Actions</TableCell>
-                </TableRow>
-              </TableHead>
               <TableBody>
                 {Array.isArray(users) && users.map((user) => (
                   <TableRow key={user.id}>
@@ -188,10 +174,6 @@ function Users() {
                     <TableCell align="left">{user.user_email}</TableCell>
                     <TableCell align="left">{user.user_number}</TableCell>
                     <TableCell align="left">{user.user_gender}</TableCell>
-                    <TableCell align="left">
-                      <Button onClick={() => handleEdit(user)} color="primary">Edit</Button>
-                      <Button onClick={() => handleDelete(user.id)} color="secondary">Delete</Button>
-                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

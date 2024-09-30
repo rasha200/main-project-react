@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('parent_name');
             $table->string('parent_number');
-            $table->string('id_img');
+            $table->string('id_img')->nullable();
             $table->enum('student_status', ['Rejected', 'Confirmed', 'Pending']);
             $table->unsignedBigInteger('user_id');
             $table->foreign(columns: 'user_id')->references('id')->on('users');
