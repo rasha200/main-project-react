@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState([]);
+  const [testimonials, setTestimonials] = useState([
+  ]);
 
   // Fetch testimonials data from API
   const fetchTestimonials = async () => {
