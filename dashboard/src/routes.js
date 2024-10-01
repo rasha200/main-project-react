@@ -57,6 +57,8 @@ import Cube from "examples/Icons/Cube";
 import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
 import Supervisors from "./layouts/Supervisor";
+import Chefs from "./layouts/addchef";
+
 
 const routes = [
   {
@@ -97,13 +99,32 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "mustafa",
-    key: "mustafa",
-    route: "/billing",
-    icon: <CreditCard size="12px" />,
-    component: <Billing />,
+    name: "Add Chefs",
+    key: "addChef",
+    route: "/chef",
+    icon: <Office size="12px" />,
+    component: <Chefs />,
     noCollapse: true,
   },
+  {
+    type: "collapse",
+    name: "Add Supervisor",
+    key: "Supervisor",
+    route: "/Supervisor",
+    icon: <Shop size="12px" />,
+    component: <Supervisors />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Add tasks",
+    key: "Tasks",
+    route: "/Task",
+    icon: <Shop size="12px" />,
+    component: <Tasks />,
+    noCollapse: true,
+  },
+
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",

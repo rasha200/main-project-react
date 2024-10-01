@@ -68,7 +68,7 @@ class SupervisorController extends Controller
     
     
             return response()->json([
-                'message' => 'supervisor updated successfully'
+                'message' => 'supervisor created successfully'
             ] , 201);
     }
 

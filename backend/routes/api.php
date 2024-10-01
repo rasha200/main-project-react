@@ -10,6 +10,8 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ChefController;
+
 
 
 /*
@@ -23,6 +25,9 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::apiResource('supervisors' , SupervisorController::class);
+Route::apiResource('chefs' , ChefController::class);
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
