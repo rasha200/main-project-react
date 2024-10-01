@@ -7,108 +7,71 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-       
         return response()->json(Student::all());
     }
 
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'parent_name' => 'required|string|max:255',
-            'parent_number' => 'required|string|max:255',
-            'id_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'student_status' => 'required',
-        ]);
+{
+    // Validate request data
+    $validatedData = $request->validate([
+        'parent_name' => 'required|string|max:255',
+        'parent_number' => 'required|string|max:255',
+        'id_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'student_status' => 'required',
+        'user_id' => 'required|exists:users,id', // Ensure user exists
+    ]);
 
-        $imagePath = null;
-
-   
+    // Handle image upload if present
+    $imagePath = null;
     if ($request->hasFile('id_img')) {
         $file = $request->file('id_img');
         $filename = time() . '.' . $file->getClientOriginalExtension();
-        $path = public_path('././././uploads'); // check the path
+        $path = public_path('uploads');
         $file->move($path, $filename);
-
-       
-        $imagePath = '././././uploads' . $filename;
+        $imagePath = 'uploads/' . $filename;
     }
 
-    Student::create([
-        'parent_name' => $validatedData->parent_name,
-        'parent_number' => $validatedData->parent_number,
-        'id_img' => $validatedData->id_img,
-        'status' => $validatedData->status,
-        'user_id' => $request->user_id,
+    // Create a student record
+    $student = Student::create([
+        'parent_name' => $validatedData['parent_name'],
+        'parent_number' => $validatedData['parent_number'],
+        'id_img' => $imagePath, // Save the uploaded image path
+        'status' => $validatedData['student_status'],
+        'user_id' => $validatedData['user_id'],
     ]);
 
-    return response()->json([
-        'message' => 'Student created successfully'
-    ] , 201);
+    return response()->json(['message' => 'Student created successfully', 'student' => $student], 201);
+}
 
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Student $student)
     {
         return response()->json($student);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Student $student)
     {
-
         $validatedData = $request->validate([
             'parent_name' => 'required|string|max:255',
             'parent_number' => 'required|string|max:255',
             'id_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required',
+            'status' => 'required|in:Rejected,Confirmed,Pending', // Ensure status matches enum values
         ]);
 
-        $imagePath = null;
+        $imagePath = $this->handleFileUpload($request);
 
-   
-    if ($request->hasFile('id_img')) {
-        $file = $request->file('id_img');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $path = public_path('././././uploads'); // check the path
-        $file->move($path, $filename);
+        // Update student record
+        $student->update([
+            'parent_name' => $validatedData['parent_name'],
+            'parent_number' => $validatedData['parent_number'],
+            'id_img' => $imagePath,
+            'status' => $validatedData['status'],
+        ]);
 
-       
-        $imagePath = '././././uploads' . $filename;
+        return response()->json(['message' => 'Student updated successfully', 'updated_student' => $student], 200);
     }
 
-
-    $student->update([
-        'parent_name' => $validatedData->parent_name,
-        'parent_number' => $validatedData->parent_number,
-        'id_img' => $validatedData->id_img,
-        'status' => $validatedData->status,
-    ]);
-
-    return response()->json([
-        'message' => 'Student updated successfully',
-        'updated_student' => $student
-    ] , 201);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Student $student)
     {
         // $student->detach()

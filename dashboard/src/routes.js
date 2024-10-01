@@ -39,13 +39,12 @@ Coded by www.creative-tim.com
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
-import VirtualReality from "layouts/virtual-reality";
-import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Courses from "./layouts/courses";
-
+import Events  from "./layouts/events";
+import Addstudent from "./layouts/addstudent";
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
 import Office from "examples/Icons/Office";
@@ -81,11 +80,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "task",
-    key: "tasks",
-    route: "/task",
-    icon: <CreditCard size="12px" />,
-    component: <Tasks />,
+    name: "Events",
+    key: "events",
+    route: "/events",
+    icon: <Office size="12px" />,
+    component: <Events />,
     noCollapse: true,
   },
   {
@@ -106,22 +105,24 @@ const routes = [
     component: <Testimonials />,
     noCollapse: true,
   },
+ 
+ 
   {
     type: "collapse",
-    name: "Virtual Reality",
-    key: "virtual-reality",
-    route: "/virtual-reality",
-    icon: <Cube size="12px" />,
-    component: <VirtualReality />,
+    name: "Add Students",
+    key: "addstudent",
+    route: "/addstudent",
+    icon: <Office size="12px" />,
+    component: <Addstudent />,
     noCollapse: true,
   },
   {
     type: "collapse",
-    name: "RTL",
-    key: "rtl",
-    route: "/rtl",
-    icon: <Settings size="12px" />,
-    component: <RTL />,
+    name: "mustafa",
+    key: "mustafa",
+    route: "/billing",
+    icon: <CreditCard size="12px" />,
+    component: <Billing />,
     noCollapse: true,
   },
   { type: "title", title: "Account Pages", key: "account-pages" },
@@ -132,6 +133,15 @@ const routes = [
     route: "/profile",
     icon: <CustomerSupport size="12px" />,
     component: <Profile />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "task",
+    key: "tasks",
+    route: "/task",
+    icon: <CreditCard size="12px" />,
+    component: <Tasks />,
     noCollapse: true,
   },
   {
