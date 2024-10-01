@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactUsController;
 
 
-use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChefController;
-use App\Http\Controllers\StudentController;
 
 
 

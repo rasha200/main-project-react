@@ -34,7 +34,7 @@ class CourseController extends Controller
         ]);
 
         // Create the course
-        $course = Course::create($validatedData);
+        $course = Course::create($request->all());
 
         // Attach students to the course if provided
         if (isset($validatedData['students'])) {

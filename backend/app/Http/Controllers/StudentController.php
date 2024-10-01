@@ -13,7 +13,7 @@ class StudentController extends Controller
     public function index()
 
     {        
-        return Student::with('courses')->get();
+        return Student::with(['courses' , 'user'])->get();
 
        
         // return response()->json(Student::all());

@@ -11,8 +11,9 @@ class ChefController extends Controller
 {
     public function index()
     {
-        return response()->json(Chef::all());
+        return response()->json(Chef::with('user')->get());
     }
+    
 
     public function store(Request $request)
     {
