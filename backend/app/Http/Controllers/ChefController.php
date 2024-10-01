@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Models\Chef;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
 class ChefController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return response()->json(Chef::all());
+        return response()->json(Chef::with('user')->get());
     }
-
-   
     
+
     public function store(Request $request)
     {
          // Validation for both user and student data
@@ -62,20 +60,14 @@ class ChefController extends Controller
         ], 200);
 
 
+        return response()->json($chef, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Chef $chef)
     {
         return response()->json($chef);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Chef $chef)
     {
         // Validate the request data
@@ -128,11 +120,16 @@ class ChefController extends Controller
      */
     public function destroy(Chef $chef)
     {
-        $chef->Delete();
+        $chef->delete();
 
-        return response()->json([
-            'message' => 'Chef deleted successfully',
-            'deleted_chef' => $chef,
-        ] , 201);
+        return response()->json(null, 204);
     }
 }
+
+
+
+    
+   
+
+   
+ 

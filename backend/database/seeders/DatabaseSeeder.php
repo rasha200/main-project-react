@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Course;
+use App\Models\Chef; // If you reference chefs
+use App\Models\Student; // If you reference students
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,11 +14,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Seed Chefs
+        $chefs = Chef::factory()->count(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Seed Courses
+        $courses = Course::factory()->count(10)->create();
+
+        // Seed Students
+        $students = Student::factory()->count(50)->create();
+
+        // Assign courses to students (populate pivot table)
+        $students->each(function ($student) use ($courses) {
+            $student->courses()->attach(
+                $courses->random(rand(1, 3))->pluck('id')->toArray()
+            );
+        });
     }
 }
+

@@ -42,7 +42,6 @@ import Billing from "layouts/billing";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-import Courses  from "./layouts/courses";
 import Events  from "./layouts/events";
 import Addstudent from "./layouts/addstudent";
 // Soft UI Dashboard React icons
@@ -58,6 +57,8 @@ import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
 import Supervisors from "./layouts/Supervisor";
 import Chefs from "./layouts/addchef";
+import Courses from "layouts/courses";
+// import Courses from "layouts/new courses";
 
 
 const routes = [
@@ -81,13 +82,13 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Events",
-    key: "events",
-    route: "/events",
-    icon: <Office size="12px" />,
-    component: <Events />,
+    name: "task",
+    key: "tasks",
+    route: "/task",
+    icon: <CreditCard size="12px" />,
+    component: <Tasks />,
     noCollapse: true,
-  },
+  }, 
   {
     type: "collapse",
     name: "Add Students",

@@ -24,14 +24,29 @@ use App\Http\Controllers\ChefController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::apiResource('supervisors' , SupervisorController::class);
-Route::apiResource('chefs' , ChefController::class);
-
-
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('supervisors' , SupervisorController::class);
+Route::apiResource('chefs' , ChefController::class);
+
+
+Route::get('courses', [CourseController::class, 'index']);
+Route::post('courses', [CourseController::class, 'store']);
+Route::get('courses/{id}', [CourseController::class, 'show']);
+Route::put('courses/{course}', [CourseController::class, 'update']);
+Route::delete('courses/{id}', [CourseController::class, 'destroy']);
+
+// Assign students to a course
+Route::post('courses/{id}/students', [CourseController::class, 'assignStudents']);
+
+// Chef and Student Routes (optional depending on the requirement)
+Route::get('chefs', [ChefController::class, 'index']);
+Route::get('students', [StudentController::class, 'index']);
+
+
 
 Route::apiResource('events', EventController::class);
 

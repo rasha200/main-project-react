@@ -30,7 +30,7 @@
                 'student_id' => 'required|exists:students,id',
             ]);
 
-            $course = Course::where('id', $request->course_id)->where('chef_id', $request->chef_id)->first();
+            $course = Course::where('id', $request->course_id)->first();
             if (!$course) {
                 return response()->json(['message' => 'Unauthorized: You are not the chef for this course.'], 403);
             }
