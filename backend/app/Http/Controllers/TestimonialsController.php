@@ -10,8 +10,9 @@ class TestimonialsController extends Controller
     
     public function index()
     {
-        $testimonials = Testimonial::with('user:id,Fname,Lname')->get();
+        $testimonials = testimonials::with('user:id,Fname,Lname')->get();
         return response()->json($testimonials);
+        // return response()->json(testimonials::all());
     }
 
 

@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState([
-  ]);
+  const [testimonials, setTestimonials] = useState([]);
 
   // Fetch testimonials data from API
   const fetchTestimonials = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/testimonials");
-      
+
       // Log the full response and data for debugging
       console.log("API Response:", response.data);
-  
+
       if (response.data && Array.isArray(response.data)) {
         setTestimonials(response.data);
       } else {
@@ -35,7 +34,8 @@ export default function Testimonials() {
 
       <div className="testimonials-container">
         {testimonials.length > 0 ? (
-          testimonials.map((testimonial) => (
+          // Limit the testimonials to the first 3 by using slice
+          testimonials.slice(0, 3).map((testimonial) => (
             <div className="testimonial" key={testimonial.id}>
               <p className="testimonial-message">{testimonial.message}</p>
               <h3 className="customer-name">
