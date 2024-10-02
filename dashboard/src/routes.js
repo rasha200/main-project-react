@@ -42,6 +42,7 @@ import Billing from "layouts/billing";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import Courses from "./layouts/courses";
 import Events  from "./layouts/events";
 import Addstudent from "./layouts/addstudent";
 // Soft UI Dashboard React icons
@@ -55,6 +56,8 @@ import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
+import ContactUs from "layouts/contactUs";
+import Testimonials from "layouts/testimonials";
 import Supervisors from "./layouts/Supervisor";
 import Chefs from "./layouts/addchef";
 import Courses from "layouts/courses";
@@ -87,7 +90,27 @@ const routes = [
     icon: <CreditCard size="12px" />,
     component: <Tasks />,
     noCollapse: true,
-  }, 
+  },
+  {
+    type: "collapse",
+    name: "Contact Us",
+    key: "contactUs",
+    route: "/contactUs",
+    icon: <CreditCard size="12px" />,
+    component: <ContactUs />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Testimonials",
+    key: "testimonials",
+    route: "/testimonials",
+    icon: <CreditCard size="12px" />,
+    component: <Testimonials />,
+    noCollapse: true,
+  },
+ 
+ 
   {
     type: "collapse",
     name: "Add Students",
@@ -125,6 +148,15 @@ const routes = [
     route: "/profile",
     icon: <CustomerSupport size="12px" />,
     component: <Profile />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "task",
+    key: "tasks",
+    route: "/task",
+    icon: <CreditCard size="12px" />,
+    component: <Tasks />,
     noCollapse: true,
   },
   {

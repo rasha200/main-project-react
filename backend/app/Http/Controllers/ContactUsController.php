@@ -32,6 +32,7 @@ class ContactUsController extends Controller
 
 
 
+    
    
     public function show(ContactUs $contactUs)
     {
@@ -49,7 +50,7 @@ class ContactUsController extends Controller
   
     public function destroy(ContactUs $contactUs)
     {
-        $ContactUs->Delete();
+        $contactUs->Delete();
 
         return response()->json([
             'message' => 'Contact Us deleted successfully'

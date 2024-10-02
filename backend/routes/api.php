@@ -10,20 +10,8 @@ use App\Http\Controllers\SupervisorController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\StudentProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ChefController;
-
-
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\TestimonialsController;
+use App\Http\Controllers\ContactUsController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -69,8 +57,8 @@ Route::get('/CreateStudent/{student}', [StudentController::class, 'show']); // G
 Route::put('/CreateStudent/{student}', [StudentController::class, 'update']); // Update a specific student by ID
 Route::delete('/CreateStudent/{student}', [StudentController::class, 'destroy']); // Delete a specific student by ID
 Route::post('/register', [AuthController ::class, 'register']);
-Route::POST('/login', [AuthController::class, 'login']);
 
+Route::POST('/login', [AuthController::class, 'login']);
 
 Route::resource('tasks', TaskController::class);
 
@@ -78,12 +66,19 @@ Route::resource('/student' , StudentController::class);
 Route::resource('/course' , CourseController::class);
 
 
-// Route::apiResource('contactUs', ContactUsController::class);
+Route::resource('/student' , StudentController::class);
+Route::resource('/course' , CourseController::class);
 
-// Route::get('/contactUs', [ContactUsController::class, 'index']);
-Route::get('/contactUs/{contactUs}', [ContactUsController::class, 'show']);
+
 Route::get('/contactUs', [ContactUsController::class, 'index']);
 
+Route::get('/contactUs/{contactUs}', [ContactUsController::class, 'show']);
 
 
+Route::delete('/contactUs/{contactUs}', [ContactUsController::class, 'destroy']);
 
+Route::get('/testimonials', [TestimonialsController::class, 'index']);
+
+Route::get('/testimonials/{testimonials}', [TestimonialsController::class, 'show']);
+
+Route::delete('/testimonials/{testimonials}', [TestimonialsController::class, 'destroy']);
