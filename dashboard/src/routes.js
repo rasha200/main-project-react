@@ -8,7 +8,7 @@ import Billing from "layouts/billing";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-import Courses  from "./layouts/courses";
+import Courses from "./layouts/courses";
 import Events  from "./layouts/events";
 import Addstudent from "./layouts/addstudent";
 // Soft UI Dashboard React icons
@@ -24,6 +24,11 @@ import Cube from "examples/Icons/Cube";
 import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
 import Feedback from "layouts/Feedback";
+import ContactUs from "layouts/contactUs";
+import Testimonials from "layouts/testimonials";
+import Supervisors from "./layouts/Supervisor";
+import Chefs from "./layouts/addchef";
+import Courses from "layouts/courses";
 
 
 const routes = [
@@ -87,6 +92,26 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Contact Us",
+    key: "contactUs",
+    route: "/contactUs",
+    icon: <CreditCard size="12px" />,
+    component: <ContactUs />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Testimonials",
+    key: "testimonials",
+    route: "/testimonials",
+    icon: <CreditCard size="12px" />,
+    component: <Testimonials />,
+    noCollapse: true,
+  },
+ 
+ 
+  {
+    type: "collapse",
     name: "Add Students",
     key: "addstudent",
     route: "/addstudent",
@@ -96,13 +121,24 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "mustafa",
-    key: "mustafa",
-    route: "/billing",
-    icon: <CreditCard size="12px" />,
-    component: <Billing />,
+    name: "Add Chefs",
+    key: "addChef",
+    route: "/chef",
+    icon: <Office size="12px" />,
+    component: <Chefs />,
     noCollapse: true,
   },
+  {
+    type: "collapse",
+    name: "Add Supervisor",
+    key: "Supervisor",
+    route: "/Supervisor",
+    icon: <Shop size="12px" />,
+    component: <Supervisors />,
+    noCollapse: true,
+  },
+
+
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",
@@ -111,6 +147,15 @@ const routes = [
     route: "/profile",
     icon: <CustomerSupport size="12px" />,
     component: <Profile />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "task",
+    key: "tasks",
+    route: "/task",
+    icon: <CreditCard size="12px" />,
+    component: <Tasks />,
     noCollapse: true,
   },
   {

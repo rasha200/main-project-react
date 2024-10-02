@@ -17,20 +17,26 @@ class Chef extends Model
         'course_id',  
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+    public function courses()
+    {
+        return $this->hasMany(Course::class); // A chef can manage multiple courses
+    }
     public function chefs()
-{
-    return $this->hasMany(Chef::class, 'ched_id');
-}
+    {
+        return $this->hasMany(Chef::class, 'ched_id');
+    }
+    
+    public function managerFeedbacks()
+    {
+        return $this->hasMany(ManagerFeedback::class, 'manager_id');
+    }
+    
+    public function supervisors()
+    {
+        return $this->hasMany(Supervisor::class, 'user_id');
+    }
 
-public function managerFeedbacks()
-{
-    return $this->hasMany(ManagerFeedback::class, 'manager_id');
 }
-
-public function supervisors()
-{
-    return $this->hasMany(Supervisor::class, 'user_id');
-}
-
-}
-

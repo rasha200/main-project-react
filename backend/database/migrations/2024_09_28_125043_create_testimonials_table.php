@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('testimonials', function (Blueprint $table) {
             $table->id();
-            $table->string('message');
+            $table->text('message');
             $table->unsignedBigInteger('user_id');
             $table->foreign(columns: 'user_id')->references('id')->on('users');
             $table->timestamps();

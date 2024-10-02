@@ -9,16 +9,25 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Fname', 'Lname']; 
 
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'coursesStudent'); // Many-to-many with courses
+    }
+    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+
+    }
+  
     public function feedbacks()
     {
         return $this->hasMany(ChefFeedback::class, 'student_id');
-    }
+             $this->hasMany(Task::class);
 
-    public function User()
-    {
-        return $this->belongsTo(User::class, 'user_id');
     }
-
+    
 }
