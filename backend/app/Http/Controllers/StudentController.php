@@ -8,13 +8,20 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     public function index()
-
-    {        
-        return Student::with(['courses' , 'user'])->get();
-
-               // return response()->json(Student::all());
+    {
+        // Eager load the user relationship
+        $students = Student::with('User')->get();
+    
+        return response()->json(data: $students);
+        // return response()->json(Student::all());
     }
+    
 
+
+
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
 {
      // Validate request data

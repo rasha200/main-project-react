@@ -5,7 +5,10 @@ namespace Database\Seeders;
 use App\Models\Course;
 use App\Models\Chef; // If you reference chefs
 use App\Models\Student; // If you reference students
+// use App\Models\Feedback;
+
 use Illuminate\Database\Seeder;
+use Database\Seeders\FeedbackSeeder; 
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // $this->call(Feedback::class);
+
         // Seed Chefs
         $chefs = Chef::factory()->count(10)->create();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Models\Chef;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,10 +14,13 @@ class ChefController extends Controller
 {
     public function index()
     {
-        return response()->json(Chef::with('user')->get());
-    }
-    
 
+        $chef = Chef::with('User')->get();
+
+        return response()->json( $chef);
+    }
+   
+    
     public function store(Request $request)
     {
          // Validation for both user and student data

@@ -1,17 +1,15 @@
 <?php
-
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ChefFeedback;
 
 class Student extends Model
 {
     use HasFactory;
 
 
-    protected $fillable = ['parent_name', 'parent_number', 'id_img', 'student_status', 'user_id'];
 
     public function courses()
     {
@@ -24,11 +22,12 @@ class Student extends Model
         return $this->belongsTo(User::class);
 
     }
-    public function tasks()
+  
+    public function feedbacks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(ChefFeedback::class, 'student_id');
+             $this->hasMany(Task::class);
 
+    }
+    
 }
-
-}
-
