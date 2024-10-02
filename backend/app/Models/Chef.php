@@ -17,23 +17,20 @@ class Chef extends Model
         'course_id',  
     ];
 
-    public function feedbacks()
-    {
-        return $this->hasMany(ChefFeedback::class);
-    }
+    public function chefs()
+{
+    return $this->hasMany(Chef::class, 'ched_id');
+}
 
+public function managerFeedbacks()
+{
+    return $this->hasMany(ManagerFeedback::class, 'manager_id');
+}
 
-    public function Manegerfeedbacks()
-    {
-        return $this->hasMany(ManagerFeedback::class);
-    }
-
-
-    public function User()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
+public function supervisors()
+{
+    return $this->hasMany(Supervisor::class, 'user_id');
+}
 
 }
 

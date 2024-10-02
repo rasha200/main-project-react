@@ -10,17 +10,46 @@ class ManagerFeedbackController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index()
+    // {
+    //     return ManagerFeedback::with(['Maneger', 'chef','user'])->get()->map(function ($feedback) {
+    //         return [
+    //             'id' => $feedback->id,
+    //             'feedback' => $feedback->feedback,
+    //             'manager_name' => $feedback->manager->user->Fname . ' ' . $feedback->manager->user->Lname, 
+    //             'supervisor_name' => $feedback->supervisor->user->Fname	,  
+    //             'chef_name' => $feedback->chef->user->Fname . ' ' . $feedback->chef->user->Lname, 
+    //         ];
+    //     });
+    // }
+
+
+
+
+
+
+
     public function index()
     {
-        return ManagerFeedback::with(['Maneger', 'chef'])->get()->map(function ($feedback) {
+        return ManagerFeedback::with(['manager', 'chef', 'supervisor'])->get()->map(function ($feedback) {
             return [
                 'id' => $feedback->id,
                 'feedback' => $feedback->feedback,
-                'student_name' => $feedback->student->user->Fname	,  // No need for additional query
-                'chef_name' => $feedback->chef->user->Fname . ' ' . $feedback->chef->user->Lname, 
+                'manager_name' => optional($feedback->manager->user)->Fname . ' ' . optional($feedback->manager->user)->Lname, 
+                'supervisor_name' => optional($feedback->supervisor->user)->Fname,  
+                'chef_name' => optional($feedback->chef->user)->Fname . ' ' . optional($feedback->chef->user)->Lname, 
             ];
         });
     }
+    
+    
+
+
+
+
+
+
+
 
     /**
      * Show the form for creating a new resource.

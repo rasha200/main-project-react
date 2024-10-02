@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class ManagerFeedback extends Model
 {
-    protected $fillable = ['feedback', 'Maneger_id', 'chef_id'];
+    use HasFactory;
 
-    public function Maneger()
+    protected $fillable = ['feedback', 'manager_id', 'chef_id', 'supervisor_id'];
+
+    public function manager()
     {
-        return $this->belongsTo(Manager::class, 'Maneger_id');
+        return $this->belongsTo(User::class, 'manager_id'); 
     }
 
     public function chef()
     {
-        return $this->belongsTo(Chef::class, 'chef_id');
+        return $this->belongsTo(Chef::class, 'chef_id'); 
     }
-    use HasFactory;
 
-    public function user()
+    public function supervisor()
     {
-        return $this->belongsTo(user::class, 'user_id');
+        return $this->belongsTo(User::class, 'supervisor_id')->where('role', 'supervisor'); 
     }
-    use HasFactory;
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,4 +21,3 @@ class ChefFeedback extends Model
         return $this->belongsTo(Chef::class, 'chef_id');
     }
 }
-

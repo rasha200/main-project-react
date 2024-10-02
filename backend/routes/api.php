@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\ChefController;
 use App\Http\Controllers\ChefFeedbackController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\CourseController;use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ManagerFeedbackController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
