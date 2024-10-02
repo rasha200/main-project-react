@@ -58,6 +58,10 @@ import { Task } from "@mui/icons-material";
 import Tasks from "./layouts/tasks";
 import ContactUs from "layouts/contactUs";
 import Testimonials from "layouts/testimonials";
+import Supervisors from "./layouts/Supervisor";
+import Chefs from "./layouts/addchef";
+import Courses from "layouts/courses";
+
 
 const routes = [
   {
@@ -80,11 +84,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Events",
-    key: "events",
-    route: "/events",
-    icon: <Office size="12px" />,
-    component: <Events />,
+    name: "task",
+    key: "tasks",
+    route: "/task",
+    icon: <CreditCard size="12px" />,
+    component: <Tasks />,
     noCollapse: true,
   },
   {
@@ -118,13 +122,24 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "mustafa",
-    key: "mustafa",
-    route: "/billing",
-    icon: <CreditCard size="12px" />,
-    component: <Billing />,
+    name: "Add Chefs",
+    key: "addChef",
+    route: "/chef",
+    icon: <Office size="12px" />,
+    component: <Chefs />,
     noCollapse: true,
   },
+  {
+    type: "collapse",
+    name: "Add Supervisor",
+    key: "Supervisor",
+    route: "/Supervisor",
+    icon: <Shop size="12px" />,
+    component: <Supervisors />,
+    noCollapse: true,
+  },
+
+
   { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('chef_feedback', function (Blueprint $table) {
             $table->id();
+            $table->text('feedback');
+            $table->unsignedBigInteger('student_id');
+            $table->foreign(columns: 'student_id')->references('id')->on('students');
+            $table->unsignedBigInteger('chef_id');
+            $table->foreign(columns: 'chef_id')->references('id')->on('chefs');
             $table->timestamps();
         });
     }
