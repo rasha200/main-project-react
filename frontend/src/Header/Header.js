@@ -35,17 +35,17 @@ export default function Header() {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="classes.html">
-                  Classes
+                <a class="nav-link" href="">
+                  sign in 
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">
-                  Contact
+                <a class="nav-link" href="">
+                  sign up
                 </a>
               </li>
             </ul>
-            <form
+            {/* <form
               action="#search"
               method="GET"
               class="d-flex search-header ms-lg-2"
@@ -60,7 +60,7 @@ export default function Header() {
               <button class="btn btn-style" type="submit">
                 <i class="fas fa-search"></i>
               </button>
-            </form>
+            </form> */}
           </div>
           <div class="cont-ser-position">
             <nav class="navigation">
