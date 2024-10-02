@@ -58,7 +58,6 @@ import Tasks from "./layouts/tasks";
 import Supervisors from "./layouts/Supervisor";
 import Chefs from "./layouts/addchef";
 import Courses from "layouts/courses";
-// import Courses from "layouts/new courses";
 
 
 const routes = [
@@ -116,15 +115,7 @@ const routes = [
     component: <Supervisors />,
     noCollapse: true,
   },
-  {
-    type: "collapse",
-    name: "Add tasks",
-    key: "Tasks",
-    route: "/Task",
-    icon: <Shop size="12px" />,
-    component: <Tasks />,
-    noCollapse: true,
-  },
+
 
   { type: "title", title: "Account Pages", key: "account-pages" },
   {

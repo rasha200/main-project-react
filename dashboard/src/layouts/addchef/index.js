@@ -24,7 +24,7 @@ function Chefs() {
     user_age: "",
     user_email: "",
     user_number: "",
-    user_img:"",
+    
     user_gender: { male: false, female: false },
     user_password: "",
     chef_description: "",
@@ -36,8 +36,8 @@ function Chefs() {
   const fetchChefs = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/api/chefs");
-      const filteredUsers = response.data.filter(user => user.role === 'chef');
-      setUsers(filteredUsers);
+      console.log(response.data);
+      setChefs(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -52,12 +52,7 @@ function Chefs() {
     setChefData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e) => {
-    setChefData((prev) => ({
-      ...prev,
-      user_img: e.target.files[0], // Store the file object
-    }));
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +65,7 @@ function Chefs() {
         await axios.post("http://127.0.0.1:8000/api/chefs", chefData);
       }
       // Reset form and state
-      setChefData({ id: "", Fname: "", Lname: "", user_age: "", user_email: "", user_number: "",user_img:"", user_gender: "", role: "", user_password: "", chef_description: ""});
+      setChefData({ id: "", Fname: "", Lname: "", user_age: "", user_email: "", user_number: "", user_gender: "", role: "", user_password: "", chef_description: ""});
       setEditing(false);
       fetchChefs(); // Refresh user list
     } catch (error) {
@@ -79,15 +74,13 @@ function Chefs() {
   };
 
   const handleGenderChange = (e) => {
-    const { name, checked } = e.target;
+    const { name } = e.target;
     setChefData((prev) => ({
       ...prev,
-      user_gender: {
-        ...prev.user_gender,
-        [name]: checked,
-      },
+      user_gender: name,  // Send "male" or "female" as a string
     }));
   };
+  
 
   const handleEdit = (chef) => {
     setChefData(chef);
@@ -140,8 +133,21 @@ function Chefs() {
 
                 <label htmlFor="exampleFormControlInput1">Gender</label>
                
-                <FormControlLabel control={<Checkbox checked={chefData.user_gender.male} onChange={handleGenderChange} name="male" />} label="Male" />
-                    <FormControlLabel control={<Checkbox checked={chefData.user_gender.female} onChange={handleGenderChange} name="female" />} label="Female" />
+          
+                {/* <FormControlLabel control={<Checkbox checked={chefData.user_gender.male} onChange={handleGenderChange} name="male" />} label="Male" />
+                    <FormControlLabel control={<Checkbox checked={chefData.user_gender.female} onChange={handleGenderChange} name="female" />} label="Female" /> */}
+                   <select
+                      className="form-select mb-4"
+                      name="user_gender"
+                      value={chefData.user_gender}
+                      onChange={handleChange}
+                      required
+                    >
+                        
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    
+                    </select>
 
                     <label htmlFor="exampleFormControlInput1">Password</label>
                    <TextField name="user_password"  value={chefData.user_password} onChange={handleChange} fullWidth margin="normal" required type="password" />
@@ -165,14 +171,20 @@ function Chefs() {
             <Table>
               <TableBody>
                 {Array.isArray(chefs) && chefs.map((chef) => (
-                  <TableRow key={user.id}>
+                  <TableRow key={chef.id}>
                     <TableCell align="left">{chef.id}</TableCell>
-                    <TableCell align="left">{chef.Fname}</TableCell>
-                    <TableCell align="left">{chef.Lname}</TableCell>
-                    <TableCell align="left">{chef.user_age}</TableCell>
-                    <TableCell align="left">{chef.user_email}</TableCell>
-                    <TableCell align="left">{chef.user_number}</TableCell>
-                    <TableCell align="left">{chef.user_gender}</TableCell>
+                    <TableCell align="left">{chef.user.Fname}</TableCell>
+                    <TableCell align="left">{chef.user.Lname}</TableCell>
+                    <TableCell align="left">{chef.user.user_age}</TableCell>
+                    <TableCell align="left">{chef.user.user_email}</TableCell>
+                    <TableCell align="left">{chef.user.user_number}</TableCell>
+                    <TableCell align="left">{chef.user.user_gender}</TableCell>
+                    <TableCell align="left">{chef.chef_description}</TableCell>
+                    <TableCell align="left"> 
+                    <Button onClick={() => handleEdit(chef)} color="primary">Edit</Button>
+                    <Button onClick={() => handleDelete(chef.id)} color="secondary">Delete</Button>
+                    </TableCell>
+                    
                   </TableRow>
                 ))}
               </TableBody>
